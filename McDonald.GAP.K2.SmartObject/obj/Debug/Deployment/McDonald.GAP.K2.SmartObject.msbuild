@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CoreDeploy">
+  <PropertyGroup>
+    <Deploy_SmartObjects_And_Associations>True</Deploy_SmartObjects_And_Associations>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TestOnly Condition="$(TestOnly) == ''">False</TestOnly>
+    <Environment Condition="$(Environment) == ''">Development</Environment>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Environment) == 'Development'">
+    <EnvironmentFields>
+      <Root Name="Development" xmlns="">
+        <Field Name="Portal (Claims)" Value="https://claims.denallix.com:444" />
+        <Field Name="Workflow Management Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="CRM Server" Value="URL=http://crm.denallix.com;Organization=Denallix" />
+        <Field Name="Workflow Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5252" />
+        <Field Name="Mail Server" Value="mail.denallix.com:25" />
+        <Field Name="SmartObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Web Service URL" Value="http://k2.denallix.com:80" />
+        <Field Name="Category Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Exchange Server" Value="ExchangeServer=mail.denallix.com;DefaultStorageGroup=;DefaultMailboxDatabase=mailbox database 0679148940" />
+        <Field Name="ServiceObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Portal" Value="http://portal.denallix.com" />
+      </Root>
+    </EnvironmentFields>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Environment) == 'Production'">
+    <EnvironmentFields>
+      <Root Name="Production" xmlns="">
+        <Field Name="Portal (Claims)" Value="" />
+        <Field Name="Workflow Management Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="CRM Server" Value="URL=http://crm.denallix.com;Organization=Denallix" />
+        <Field Name="Workflow Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5252" />
+        <Field Name="Mail Server" Value="mail.denallix.com:25" />
+        <Field Name="SmartObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Web Service URL" Value="http://k2.denallix.com:80" />
+        <Field Name="Category Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Exchange Server" Value="ExchangeServer=mail.denallix.com;DefaultStorageGroup=;DefaultMailboxDatabase=mailbox database 0679148940" />
+        <Field Name="ServiceObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Portal" Value="" />
+      </Root>
+    </EnvironmentFields>
+  </PropertyGroup>
+  <PropertyGroup>
+    <WorkflowManagementConnectionStringProperty>$Field=Workflow Management Server</WorkflowManagementConnectionStringProperty>
+    <SmartObjectConnectionStringProperty>$Field=SmartObject Server</SmartObjectConnectionStringProperty>
+    <DeploymentLabelName>DENALLIX\Administrator - 5/22/2013 9:34:32 PM</DeploymentLabelName>
+    <DeploymentLabelDescription />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageResource Include="Resources\5c914ea7-8c27-412d-8308-3da95238746e-McDonald.GAP.K2.SmartObject-Employee.SmartObjects.res">
+      <Name>5c914ea7-8c27-412d-8308-3da95238746e-McDonald.GAP.K2.SmartObject-Employee</Name>
+      <Group>SmartObjects</Group>
+    </PackageResource>
+  </ItemGroup>
+  <Target Name="Deploy" DependsOnTargets="Deploy SmartObjects and Associations" />
+  <Import Project="ProjectDeployment.targets" />
+  <Target Name="Deploy SmartObjects and Associations" Condition="$(Deploy_SmartObjects_And_Associations) == 'true'">
+    <SourceCode.DeploymentTasks.SmartObjects.SmartObjectDeployTask TaskGuid="b779ce4d77a142978fff23b2c989b107" />
+  </Target>
+  <UsingTask TaskName="SourceCode.DeploymentTasks.SmartObjects.SmartObjectDeployTask" AssemblyFile="Bin\SourceCode.DeploymentTasks.dll" />
+</Project>

@@ -1,0 +1,6 @@
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\bin\Debug\ConsoleApp.exe.config
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\bin\Debug\ConsoleApp.exe
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\bin\Debug\ConsoleApp.pdb
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\obj\x86\Debug\ConsoleApp.exe
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\ConsoleApp\obj\x86\Debug\ConsoleApp.pdb

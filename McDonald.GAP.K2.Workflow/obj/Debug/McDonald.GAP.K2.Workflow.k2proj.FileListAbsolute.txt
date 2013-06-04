@@ -1,0 +1,2 @@
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Workflow\obj\Debug\McDonald.GAP.K2.Workflow.dll
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Workflow\bin\Debug\McDonald.GAP.K2.Workflow.dll

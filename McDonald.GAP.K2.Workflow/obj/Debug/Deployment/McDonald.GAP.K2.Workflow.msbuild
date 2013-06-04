@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="CoreDeploy">
+  <PropertyGroup>
+    <Deploy_Processes>True</Deploy_Processes>
+    <Create_Notifications>True</Create_Notifications>
+    <Create_Workflow_SmartObjects>True</Create_Workflow_SmartObjects>
+    <Create_Workflow_Reporting_SmartObjects>True</Create_Workflow_Reporting_SmartObjects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TestOnly Condition="$(TestOnly) == ''">False</TestOnly>
+    <Environment Condition="$(Environment) == ''">Development</Environment>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Environment) == 'Development'">
+    <EnvironmentFields>
+      <Root Name="Development" xmlns="">
+        <Field Name="Portal (Claims)" Value="https://claims.denallix.com:444" />
+        <Field Name="Workflow Management Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="CRM Server" Value="URL=http://crm.denallix.com;Organization=Denallix" />
+        <Field Name="Workflow Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5252" />
+        <Field Name="Mail Server" Value="mail.denallix.com:25" />
+        <Field Name="SmartObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Web Service URL" Value="http://k2.denallix.com:80" />
+        <Field Name="Category Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Exchange Server" Value="ExchangeServer=mail.denallix.com;DefaultStorageGroup=;DefaultMailboxDatabase=mailbox database 0679148940" />
+        <Field Name="ServiceObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Portal" Value="http://portal.denallix.com" />
+      </Root>
+    </EnvironmentFields>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Environment) == 'Production'">
+    <EnvironmentFields>
+      <Root Name="Production" xmlns="">
+        <Field Name="Portal (Claims)" Value="" />
+        <Field Name="Workflow Management Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="CRM Server" Value="URL=http://crm.denallix.com;Organization=Denallix" />
+        <Field Name="Workflow Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5252" />
+        <Field Name="Mail Server" Value="mail.denallix.com:25" />
+        <Field Name="SmartObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Web Service URL" Value="http://k2.denallix.com:80" />
+        <Field Name="Category Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Exchange Server" Value="ExchangeServer=mail.denallix.com;DefaultStorageGroup=;DefaultMailboxDatabase=mailbox database 0679148940" />
+        <Field Name="ServiceObject Server" Value="Integrated=True;IsPrimaryLogin=True;Authenticate=True;EncryptedPassword=False;Host=DLX;Port=5555" />
+        <Field Name="Portal" Value="" />
+      </Root>
+    </EnvironmentFields>
+  </PropertyGroup>
+  <PropertyGroup>
+    <WorkflowManagementConnectionStringProperty>$Field=Workflow Management Server</WorkflowManagementConnectionStringProperty>
+    <SmartObjectConnectionStringProperty>$Field=SmartObject Server</SmartObjectConnectionStringProperty>
+    <DeploymentLabelName>DENALLIX\Administrator - 5/22/2013 9:56:24 PM</DeploymentLabelName>
+    <DeploymentLabelDescription />
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageResource Include="Resources\McDonald.GAP.K2.Workflow-CashReimbursementProcess.Processes.res">
+      <Name>McDonald.GAP.K2.Workflow-CashReimbursementProcess</Name>
+      <Group>Processes</Group>
+    </PackageResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageResource Include="Resources\NotificationServiceDetails 14b857996fd94948b90ab52298d8759e.Notifications.res">
+      <Name>NotificationServiceDetails 14b857996fd94948b90ab52298d8759e</Name>
+      <Group>Notifications</Group>
+    </PackageResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageResource Include="Resources\WorkflowReportingServiceDetails 70d7dedb-20eb-4afb-bb63-cda92a0c9c8b.WorkflowReportingSmartObjects.res">
+      <Name>WorkflowReportingServiceDetails 70d7dedb-20eb-4afb-bb63-cda92a0c9c8b</Name>
+      <Group>WorkflowReportingSmartObjects</Group>
+    </PackageResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageResource Include="Resources\McDonald.GAP.K2.Workflow-CashReimbursementProcess-ProcessView.Views.res">
+      <Name>McDonald.GAP.K2.Workflow-CashReimbursementProcess-ProcessView</Name>
+      <Group>Views</Group>
+    </PackageResource>
+  </ItemGroup>
+  <Target Name="Deploy" DependsOnTargets="Deploy Processes;Create Notifications;Create Workflow SmartObjects;Create Workflow Reporting SmartObjects" />
+  <Import Project="ProjectDeployment.targets" />
+  <Target Name="Deploy Processes" Condition="$(Deploy_Processes) == 'true'">
+    <SourceCode.DeploymentTasks.ExportProcessTask TaskGuid="05636fdae2fc4618951800e3b7dca61a" />
+  </Target>
+  <UsingTask TaskName="SourceCode.DeploymentTasks.ExportProcessTask" AssemblyFile="Bin\SourceCode.DeploymentTasks.dll" />
+  <Target Name="Create Notifications" Condition="$(Create_Notifications) == 'true'">
+    <SourceCode.DeploymentTasks.NotificationService.NotificationTask TaskGuid="728ee86eedf44a88bfbdfaef82aa4417" />
+  </Target>
+  <UsingTask TaskName="SourceCode.DeploymentTasks.NotificationService.NotificationTask" AssemblyFile="Bin\SourceCode.DeploymentTasks.dll" />
+  <Target Name="Create Workflow SmartObjects" Condition="$(Create_Workflow_SmartObjects) == 'true'" />
+  <Target Name="Create Workflow Reporting SmartObjects" Condition="$(Create_Workflow_Reporting_SmartObjects) == 'true'">
+    <SourceCode.DeploymentTasks.SmartObjectServices.WorkflowReportingServiceTask TaskGuid="570afe056dde4e6890cfde45119cc36e" />
+  </Target>
+  <UsingTask TaskName="SourceCode.DeploymentTasks.SmartObjectServices.WorkflowReportingServiceTask" AssemblyFile="Bin\SourceCode.DeploymentTasks.dll" />
+</Project>

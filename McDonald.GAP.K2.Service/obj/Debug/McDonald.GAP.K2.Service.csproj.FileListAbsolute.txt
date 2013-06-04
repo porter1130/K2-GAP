@@ -1,0 +1,5 @@
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Service\bin\Debug\McDonald.GAP.K2.Service.dll
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Service\bin\Debug\McDonald.GAP.K2.Service.pdb
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Service\obj\Debug\ResolveAssemblyReference.cache
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Service\obj\Debug\McDonald.GAP.K2.Service.dll
+c:\K2 101\Labs\03-SmartObjects\McDonald.GAP\McDonald.GAP.K2.Service\obj\Debug\McDonald.GAP.K2.Service.pdb
